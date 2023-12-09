@@ -1,4 +1,5 @@
 const User = require('../models/user');
+const jwt = require('jsonwebtoken');
 
 exports.addUser = async (req, res, next) => {
     try {
@@ -16,5 +17,43 @@ exports.addUser = async (req, res, next) => {
         res.status(500).json({
             error: err
         })
+    }
+}
+function isstringnotvalid(string) {
+    if (string == undefined || string.length === 0) {
+        return true;
+    }
+    else {
+        return false;
+    }
+}
+function generateAccessToken(id, name) {
+    return jwt.sign({ userId: id, name: name }, 'secretkey')
+}
+
+exports.login = async (req, res) => {
+    try {
+        const { email, password } = req.body;
+
+        if (isstringnotvalid(email) || isstringnotvalid(password)) {
+            return res.status(400).json({ message: "Email id or password is missing", success: false })
+        }
+        const user = await User.findAll({ where: { email } })
+        if (user.length > 0) {
+
+            if (password == user[0].password) {
+                res.status(200).json({ success: true, message: "User logged in sucessfully", token: generateAccessToken(user[0].id, user[0].name) })
+            }
+            else {
+                return res.status(400).json({ success: false, message: "Password is incorrect" })
+            }
+        }
+
+        else {
+            return res.status(404).json({ success: false, message: "User doesnot exist" })
+        }
+    }
+    catch (err) {
+        res.status(500).json({ message: err, success: false })
     }
 }
