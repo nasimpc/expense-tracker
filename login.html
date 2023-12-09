@@ -40,8 +40,15 @@
                 email: email,
                 password: password,
             }
-            const postDetails = axios.post("http://localhost:3000/user/sign_up", obj);
-            let res = await postDetails;
+            try {
+                const postDetails = axios.post("http://localhost:3000/user/add-user", obj);
+                let res = await postDetails;
+            }
+            catch (err) {
+                console.log("hi", err);
+                confirm('User already exists');
+
+            }
         }
     </script>
 </body>
