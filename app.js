@@ -14,6 +14,7 @@ app.use(cors());
 
 app.use(bodyParser.json({ extended: false }));
 
+
 app.use('/user', userRoutes);
 
 sequelize
