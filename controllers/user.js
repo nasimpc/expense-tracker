@@ -1,19 +1,24 @@
 const User = require('../models/user');
+const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
 exports.addUser = async (req, res, next) => {
     try {
 
-        console.log(req.body);
-        const name = req.body.name;
-        const email = req.body.email;
-        const password = req.body.password;
+        const { name, email, password } = req.body;
 
-        const data = await User.create({ name: name, email: email, password: password });
-        res.status(201).json({ newUserDetail: data });
+        if (isstringnotvalid(name) || isstringnotvalid(email) || isstringnotvalid(password)) {
+            return res.status(400).json({ err: "Bad parameters - Something is missing" })
+        }
+
+        const saltrounds = 10;
+        bcrypt.hash(password, saltrounds, async (err, hash) => {
+            await User.create({ name, email, password: hash })
+            res.status(201).json({ message: 'Successfuly create new user' })
+        })
+
     }
     catch (err) {
-        console.log(err);
         res.status(500).json({
             error: err
         })
@@ -41,12 +46,17 @@ exports.login = async (req, res) => {
         const user = await User.findAll({ where: { email } })
         if (user.length > 0) {
 
-            if (password == user[0].password) {
-                res.status(200).json({ success: true, message: "User logged in sucessfully", token: generateAccessToken(user[0].id, user[0].name) })
-            }
-            else {
-                return res.status(400).json({ success: false, message: "User not authorized" })
-            }
+            bcrypt.compare(password, user[0].password, (err, result) => {
+                if (err) {
+                    res.status(500).json({ success: false, message: "Something went wrong" })
+                }
+                if (result == true) {
+                    res.status(200).json({ success: true, message: "User logged in sucessfully", token: generateAccessToken(user[0].id, user[0].name) })
+                }
+                else {
+                    return res.status(400).json({ success: false, message: "Password is incorrect" })
+                }
+            })
         }
 
         else {

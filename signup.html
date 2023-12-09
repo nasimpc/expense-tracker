@@ -42,8 +42,8 @@
                 password: password,
             }
             try {
-                const postDetails = axios.post("http://localhost:3000/user/add-user", obj);
-                let res = await postDetails;
+                let res = await axios.post("http://localhost:3000/user/add-user", obj);
+                alert(res.data.message)
             }
             catch (err) {
                 //console.log("hi1", err);
