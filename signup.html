@@ -44,6 +44,7 @@
             try {
                 let res = await axios.post("http://localhost:3000/user/add-user", obj);
                 alert(res.data.message)
+                window.location.href = "../main.html"
             }
             catch (err) {
                 //console.log("hi1", err);
