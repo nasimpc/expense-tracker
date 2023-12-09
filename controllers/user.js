@@ -45,12 +45,12 @@ exports.login = async (req, res) => {
                 res.status(200).json({ success: true, message: "User logged in sucessfully", token: generateAccessToken(user[0].id, user[0].name) })
             }
             else {
-                return res.status(400).json({ success: false, message: "Password is incorrect" })
+                return res.status(400).json({ success: false, message: "User not authorized" })
             }
         }
 
         else {
-            return res.status(404).json({ success: false, message: "User doesnot exist" })
+            return res.status(404).json({ success: false, message: "User not found" })
         }
     }
     catch (err) {
