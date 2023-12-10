@@ -50,18 +50,17 @@
 
 
             const obj = {
-                userid: userid,
                 amount: amount,
                 description: description,
                 category: category
             }
-
-            let res = await axios.post("http://localhost:3000/expense/add-expense", obj);
+            const token = localStorage.getItem('token')
+            let res = await axios.post("http://localhost:3000/expense/add-expense", obj, { headers: { "Authorization": token } });
             showNewExpenseOnScreen(res.data.newExpenseDetails)
         }
         window.addEventListener("DOMContentLoaded", async () => {
-
-            let res = await axios.get("http://localhost:3000/expense/get-expenses");
+            const token = localStorage.getItem('token')
+            let res = await axios.get("http://localhost:3000/expense/get-expenses", { headers: { "Authorization": token } });
 
             for (var i = 0; i < res.data.allExpenses.length; i++) {
                 showNewExpenseOnScreen(res.data.allExpenses[i])
