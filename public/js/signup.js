@@ -12,7 +12,7 @@ async function saveToStorage(e) {
     try {
         let res = await axios.post(`../user/add-user`, obj);
         alert(res.data.message)
-        window.location.href = "/mainPage"
+        window.location.href = "mainPage"
     }
     catch (err) {
         //console.log("hi1", err);

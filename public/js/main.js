@@ -70,8 +70,64 @@ function editItem(e) {
             axios.delete(`../expense/delete-expense/${id}`);
         }
     }
-    else if (e.target.classList.contains('premium')) {
-        console.log('hi');
+
+}
+
+document.getElementById('rzp-button1').onclick = async function (e) {
+    try {
+        const token = localStorage.getItem('token');
+        const response = await axios.get("../purchase/premiummembership", {
+            headers: {
+                'Authorization': token
+            }
+        });
+        // clearFields();
+        // successDiv3.classList.remove('d-none');
+        // successDiv3.classList.add('d-block');
+        const { key_id, orderid } = response.data;
+        const { name, email } = response.data.user;
+        var options = {
+            "key": key_id,
+            "order_id": orderid,
+            "description": "expense tracker Test",
+            "handler": async function (response) {
+                const premiumstatus = await axios.put("../purchase/updatetransactionstatus", {
+                    order_id: response.razorpay_order_id,
+                    payment_id: response.razorpay_payment_id,
+                    status: "successful"
+                }, { headers: { 'Authorization': token } });
+                let logoName = document.getElementById('logoName');
+                logoName.innerHTML = "Expense Tracker Pro";
+                document.getElementById('rzp-button1').remove();
+
+                alert(premiumstatus.data.message);
+                // window.location.href = "user";
+            },
+            "prefill": {
+                "name": name,
+                "email": email
+            },
+            "notes": {
+                "address": "None"
+            },
+        };
+        var rzp1 = new Razorpay(options);
+        rzp1.open();
+        e.preventDefault();
+
+        rzp1.on('payment.failed', function (response) {
+            console.log(response, response.id);
+            axios.put("../purchase/updatetransactionstatus", {
+                order_id: response.id,
+                status: "Failed"
+            }, { headers: { 'Authorization': token } }).then(
+
+                alert('Something went wrong Transaction failed'));
+
+        });
+
+    } catch (error) {
+        console.log(error);
     }
 
 }
