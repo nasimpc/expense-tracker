@@ -2,13 +2,23 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+exports.getLoginPage = (request, response, next) => {
+    response.sendFile('login.html', { root: 'views' });
+}
+exports.getSignupPage = (request, response, next) => {
+    response.sendFile('signup.html', { root: 'views' });
+}
+exports.getMainPage = (request, response, next) => {
+    response.sendFile('main.html', { root: 'views' });
+}
+
 exports.addUser = async (req, res, next) => {
     try {
 
         const { name, email, password } = req.body;
 
         if (isstringnotvalid(name) || isstringnotvalid(email) || isstringnotvalid(password)) {
-            return res.status(400).json({ err: "Bad parameters - Something is missing" })
+            return res.status(400).json({ err: "Something is missing" })
         }
 
         const saltrounds = 10;

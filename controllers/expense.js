@@ -5,7 +5,6 @@ exports.addExpense = async (req, res, next) => {
     try {
 
         const { amount, description, category } = req.body;
-        console.log(req.user);
         const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id });
         res.status(201).json({ newExpenseDetails: data });
     }
