@@ -24,6 +24,13 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     for (var i = 0; i < res.data.allExpenses.length; i++) {
         showNewExpenseOnScreen(res.data.allExpenses[i])
+
+    }
+    const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
+    const { name, email, ispremiumuser } = currentuser.data.user;
+    if (ispremiumuser == 1) {
+        document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
+        document.getElementById('rzp-button1').remove();
     }
 
 })
@@ -96,8 +103,8 @@ document.getElementById('rzp-button1').onclick = async function (e) {
                     payment_id: response.razorpay_payment_id,
                     status: "successful"
                 }, { headers: { 'Authorization': token } });
-                let logoName = document.getElementById('logoName');
-                logoName.innerHTML = "Expense Tracker Pro";
+
+                document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
                 document.getElementById('rzp-button1').remove();
 
                 alert(premiumstatus.data.message);
@@ -116,13 +123,13 @@ document.getElementById('rzp-button1').onclick = async function (e) {
         e.preventDefault();
 
         rzp1.on('payment.failed', function (response) {
-            console.log(response, response.id);
+            console.log(response.error.metadata.order_id);
             axios.put("../purchase/updatetransactionstatus", {
-                order_id: response.id,
-                status: "Failed"
-            }, { headers: { 'Authorization': token } }).then(
-
-                alert('Something went wrong Transaction failed'));
+                order_id: response.error.metadata.order_id,
+                payment_id: response.error.metadata.payment_id,
+                status: "faild"
+            }, { headers: { 'Authorization': token } });
+            alert('Something went wrong Transaction failed hi3');
 
         });
 

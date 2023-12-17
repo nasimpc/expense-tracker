@@ -77,3 +77,8 @@ exports.login = async (req, res) => {
         res.status(500).json({ message: err, success: false })
     }
 }
+
+exports.getcurrentuser = async (request, response, next) => {
+    const user = request.user;
+    response.json({ user });
+}
