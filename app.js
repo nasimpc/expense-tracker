@@ -11,6 +11,7 @@ const Order = require('./models/orders');
 const Expense = require('./models/expense');
 
 const userRoutes = require('./routes/user');
+const premiumRouter = require('./routes/premium');
 const purchaseRouter = require('./routes/purchase');
 const expenseRoutes = require('./routes/expense');
 //const { HasMany } = require('sequelize');
@@ -27,6 +28,7 @@ User.hasMany(Order);
 
 app.use('/expense', expenseRoutes);
 app.use('/purchase', purchaseRouter);
+app.use('/premium', premiumRouter);
 app.use('/user', userRoutes);
 
 async function initiate() {

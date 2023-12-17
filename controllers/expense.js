@@ -6,6 +6,8 @@ exports.addExpense = async (req, res, next) => {
 
         const { amount, description, category } = req.body;
         const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id });
+        const totalExpenses = await Expense.sum('amount', { where: { UserId: req.user.id } });
+        await req.user.update({ totalExpenses: totalExpenses });
         res.status(201).json({ newExpenseDetails: data });
     }
     catch (err) {

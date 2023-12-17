@@ -31,6 +31,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     if (ispremiumuser == 1) {
         document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
         document.getElementById('rzp-button1').remove();
+        document.getElementById('rzp-button2').className = "btn float-end premium btn-success";
     }
 
 })
@@ -106,6 +107,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
 
                 document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
                 document.getElementById('rzp-button1').remove();
+                document.getElementById('rzp-button2').className = "btn float-end premium btn-success";
 
                 alert(premiumstatus.data.message);
                 // window.location.href = "user";
