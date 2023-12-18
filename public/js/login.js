@@ -11,7 +11,7 @@ async function saveToStorage(e) {
         const response = await axios.post(`../user/login`, obj)
         if (response.status === 200) {
             alert(response.data.message)
-            console.log(response.data.token);
+            localStorage.setItem('token', response.data.token);
             window.location.href = "mainPage"
         }
 

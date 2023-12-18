@@ -72,10 +72,11 @@ function showNewExpenseOnScreen(obj, ID = '1qazx234rfvrrf') {
 function editItem(e) {
     if (e.target.classList.contains('delete')) {
         if (confirm('Are You Sure?')) {
+            const token = localStorage.getItem('token')
             var div = e.target.parentElement.parentElement;
             body.removeChild(div);
             var id = e.target.parentElement.id;
-            axios.delete(`../expense/delete-expense/${id}`);
+            axios.delete(`../expense/delete-expense/${id}`, { headers: { "Authorization": token } });
         }
     }
 

@@ -9,7 +9,7 @@ router.post('/add-expense', userauthentication.authenticate, expensecontroller.a
 
 router.get('/get-expenses', userauthentication.authenticate, expensecontroller.getExpense);
 
-router.delete('/delete-expense/:id', expensecontroller.deleteExpense);
+router.delete('/delete-expense/:id', userauthentication.authenticate, expensecontroller.deleteExpense);
 
 // router.edit('/edit-user/:id', usercontroller.editUser);
 
