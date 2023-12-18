@@ -1,3 +1,5 @@
+const { response } = require("express");
+
 async function saveToStorage(e) {
     e.preventDefault();
     const name = e.target.name.value;
@@ -12,6 +14,7 @@ async function saveToStorage(e) {
     try {
         let res = await axios.post(`../user/add-user`, obj);
         alert(res.data.message)
+        localStorage.setItem('token', res.data.token);
         window.location.href = "mainPage"
     }
     catch (err) {
