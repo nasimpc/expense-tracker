@@ -14,6 +14,7 @@ const userRoutes = require('./routes/user');
 const premiumRouter = require('./routes/premium');
 const purchaseRouter = require('./routes/purchase');
 const expenseRoutes = require('./routes/expense');
+const passwordRoutes = require('./routes/resetpass');
 //const { HasMany } = require('sequelize');
 
 const app = express();
@@ -30,6 +31,7 @@ app.use('/expense', expenseRoutes);
 app.use('/purchase', purchaseRouter);
 app.use('/premium', premiumRouter);
 app.use('/user', userRoutes);
+app.use('/password', passwordRoutes);
 
 async function initiate() {
     try {

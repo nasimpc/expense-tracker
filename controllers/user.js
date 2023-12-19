@@ -23,8 +23,8 @@ exports.addUser = async (req, res, next) => {
 
         const saltrounds = 10;
         bcrypt.hash(password, saltrounds, async (err, hash) => {
-            await User.create({ name, email, password: hash })
-            res.status(201).json({ message: 'Successfuly create new user' })
+            const user = await User.create({ name, email, password: hash })
+            res.status(201).json({ message: 'Successfuly create new user', token: generateAccessToken(user.dataValues.id, user.dataValues.name) })
         })
 
     }

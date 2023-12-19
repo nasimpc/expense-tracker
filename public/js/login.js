@@ -22,3 +22,21 @@ async function saveToStorage(e) {
 
     }
 }
+
+
+async function forgetPass(e) {
+    e.preventDefault();
+    const email = e.target.forgetEmail.value;
+    try {
+        const data = {
+            email: email,
+        }
+        const res = await axios.post('../password/forgotpassword', data);
+
+    }
+    catch (err) {
+        console.log(err)
+
+    }
+
+}

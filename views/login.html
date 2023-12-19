@@ -21,9 +21,47 @@
                 <button class="btn btn-primary"> Login </button><br>
 
             </form>
+            <a href="#" id="forgot-password-button" data-bs-dismiss="modal" data-bs-toggle="modal"
+                data-bs-target="#forgotPasswordModal">Forgot password?</a>
         </div>
     </div>
-    <p id="b"></p>
+    <!-- <div class="modal fade" id="forgotPasswordModal">
+        <div class="card bg-primary-subtle" style="width: 1000px">
+            <div class="card-body">
+                <h2 class="card-title">Forget Password Form</h2>
+                <form id="forgotpassword_form">
+                    <label class="form-label"> Email</label>
+                    <input id="email" type="email" name="email" class="form-control" required />
+
+                    <button class="btn btn-primary"> Submit</button><br>
+
+                </form>
+
+            </div>
+        </div> -->
+
+
+    <!-- </div> -->
+    <div class="modal fade" id="forgotPasswordModal">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content ">
+                <div class="modal-header bg-secondary-subtle text-black" id="headDiv">
+                    <h2>Reset Your Password</h2>
+                    <button class="btn btn-close" data-bs-dismiss="modal"
+                        data-bs-target="#forgotPasswordModal"></button>
+                </div>
+                <div class="modal-body bg-primary-subtle text-black">
+                    <!--Forgot form-->
+                    <form id="forgotpassword_form" onsubmit="forgetPass(event)">
+
+                        <label class="form-label"> Email</label>
+                        <input id="forgetEmail" type="email" name="forgetEmail" class="form-control" required />
+                        <button class="btn btn-primary"> Submit </button><br>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
     <script src="/js/login.js"></script>
 </body>

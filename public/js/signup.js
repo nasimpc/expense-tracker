@@ -14,6 +14,7 @@ async function saveToStorage(e) {
     try {
         let res = await axios.post(`../user/add-user`, obj);
         alert(res.data.message)
+        console.log(res);
         localStorage.setItem('token', res.data.token);
         window.location.href = "mainPage"
     }
