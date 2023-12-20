@@ -7,6 +7,7 @@ const bodyParser = require('body-parser');
 const PORT = process.env.PORT;
 
 const User = require('./models/user');
+const Forgotpasswords = require('./models/forgotpasswords');
 const Order = require('./models/orders');
 const Expense = require('./models/expense');
 
@@ -24,6 +25,10 @@ app.use(express.static('public'));
 
 Expense.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Expense);
+
+Forgotpasswords.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Forgotpasswords);
+
 Order.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Order);
 
