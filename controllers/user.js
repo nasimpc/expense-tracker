@@ -2,12 +2,12 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.getLoginPage = (request, response, next) => {
-    response.sendFile('login.html', { root: 'views' });
+exports.getIntroPage = (request, response, next) => {
+    response.sendFile('intro.html', { root: 'views' });
 }
-exports.getSignupPage = (request, response, next) => {
-    response.sendFile('signup.html', { root: 'views' });
-}
+// exports.getSignupPage = (request, response, next) => {
+//     response.sendFile('signup.html', { root: 'views' });
+// }
 exports.getMainPage = (request, response, next) => {
     response.sendFile('main.html', { root: 'views' });
 }
