@@ -141,3 +141,6 @@ document.getElementById('rzp-button1').onclick = async function (e) {
     }
 
 }
+document.getElementById('rzp-button2').onclick = async function (e) {
+    window.location.href = "proPage"
+}

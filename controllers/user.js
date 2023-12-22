@@ -5,9 +5,9 @@ const jwt = require('jsonwebtoken');
 exports.getIntroPage = (request, response, next) => {
     response.sendFile('intro.html', { root: 'views' });
 }
-// exports.getSignupPage = (request, response, next) => {
-//     response.sendFile('signup.html', { root: 'views' });
-// }
+exports.getProPage = (request, response, next) => {
+    response.sendFile('pro.html', { root: 'views' });
+}
 exports.getMainPage = (request, response, next) => {
     response.sendFile('main.html', { root: 'views' });
 }

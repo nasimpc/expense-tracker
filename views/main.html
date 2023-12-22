@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 
 <head>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -8,43 +9,64 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body id="a" class="bg-success-subtle bg-gradient">
+<body class="bg-success-subtle bg-gradient">
+    <nav class="nav navbar navbar-expand-lg bg-dark-subtle col-12">
+        <div class="container text-black p-3 ">
 
-    <div class="card bg-primary-subtle" style="width: 1000px">
-        <div class="card-body">
+            <h2>Expense Tracker</h2>
+            <button class="invisible" id="rzp-button2"> Pro Page</button>
             <button class="btn float-end premium btn-success" id="rzp-button1"> Buy Premium </button>
-            <button class="invisible" id="rzp-button2"> Show LeaderBoard</button>
-            <h2 id="logoName" class="card-title">Expenses Tracker</h2>
 
 
-            <form onsubmit="saveToStorage(event)">
-                <label calss="form-label"> Expense amount</label>
-                <input id="amount" class="form-control" type="number" name="amount" required />
-                <label calss="form-label"> Choose description</label>
-                <input id="description" class="form-control" type="text" name="description" required />
-
-                <label calss="form-label">Choose category
-                    <select id="category" class="form-select" name="category">
-                        <option value="" selected="selected">Select One</option>
-                        <option value="fuel">fuel</option>
-                        <option value="food">food</option>
-                        <option value="electricity">electricity</option>
-                        <option value="movie">movie</option>
-                    </select>
-                </label>
-                <button class="btn btn-primary"> Add Expence </button><br>
+        </div>
+    </nav>
+    <div class="row">
+        <div class="col card bg-primary-subtle m-lg-5" style="width: 500px">
+            <div class="card-body">
+                <h2 id="logoName" class="card-title">Expenses Tracker</h2>
 
 
-            </form>
+
+                <form onsubmit="saveToStorage(event)">
+                    <label calss="form-label"> Expense amount</label>
+                    <input id="amount" class="form-control" type="number" name="amount" required />
+                    <label calss="form-label"> Choose description</label>
+                    <input id="description" class="form-control" type="text" name="description" required />
+                    <label calss="form-label"> Payment method</label>
+                    <input id="paymentMethod" class="form-control" type="text" name="paymentMethod" required />
+
+                    <label calss="form-label" style="width:460px">Choose category
+                        <select id="category" class="form-select" name="category">
+                            <option value="" selected="selected">Select One</option>
+                            <option value="fuel">fuel</option>
+                            <option value="food">food</option>
+                            <option value="electricity">electricity</option>
+                            <option value="movie">movie</option>
+                        </select>
+                    </label>
+                    <button class="btn btn-primary" style="width: 460px;"> Add Expence </button><br>
+
+
+                </form>
+            </div>
+        </div>
+        <div id="a" class="col m-lg-5">
+            <h2>Expenses</h2>
+            <p id="b"></p>
         </div>
     </div>
-    <h2>Expenses</h2>
-    <p id="b"></p>
-    <p id="c"></p>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
-    <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
-    <script src="/js/main.js"></script>
-    <script src="/js/premium.js"></script>
+
+    <footer class="bg-dark-subtle bg-opacity-100 py-4 fixed-bottom text-black">
+        <!-- Footer Content Here -->
+        <div class="container text-center">
+            <p> Copyright © 2023 Simple.in All rights reserved. </p>
+            <p>Contact: nasimpcm@gmail.com </p>
+        </div>
+    </footer>
+
 </body>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
+<script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="/js/main.js"></script>
 
 </html>
