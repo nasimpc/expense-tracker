@@ -43,7 +43,7 @@ exports.updatetransactionstatus = async (request, response, next) => {
                 { where: { orderid: order_id } }
             )
         ])
-        response.status(202).json({ success: true, message: "Thank youfor being a premium user" });
+        response.status(202).json({ success: true, message: "Thank you for being a pro user" });
     } catch (error) {
         console.log(error);
         response.status(500).json({ success: false, message: "Error updating transaction" });

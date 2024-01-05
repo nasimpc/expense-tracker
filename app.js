@@ -10,13 +10,13 @@ const User = require('./models/user');
 const Forgotpasswords = require('./models/forgotpasswords');
 const Order = require('./models/orders');
 const Expense = require('./models/expense');
+const Downloads = require('./models/downloads');
 
 const userRoutes = require('./routes/user');
 const premiumRouter = require('./routes/premium');
 const purchaseRouter = require('./routes/purchase');
 const expenseRoutes = require('./routes/expense');
 const passwordRoutes = require('./routes/resetpass');
-//const { HasMany } = require('sequelize');
 
 const app = express();
 app.use(cors());
@@ -31,6 +31,9 @@ User.hasMany(Forgotpasswords);
 
 Order.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
 User.hasMany(Order);
+
+Downloads.belongsTo(User, { constraints: true, onDelete: 'CASCADE' });
+User.hasMany(Downloads);
 
 app.use('/expense', expenseRoutes);
 app.use('/purchase', purchaseRouter);

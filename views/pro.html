@@ -17,15 +17,22 @@
 
         </div>
     </nav>
-    <p id="b">Hi i am pro</p>
-    <button class="btn premium btn-success" id="download"> download </button>
-    <footer class="bg-dark-subtle bg-opacity-100 py-4 fixed-bottom text-black">
-        <!-- Footer Content Here -->
-        <div class="container text-center">
-            <p> Copyright © 2023 Simple.in All rights reserved. </p>
-            <p>Contact: nasimpcm@gmail.com </p>
+    <p id="b"></p>
+    <div class="card bg-primary-subtle bg-opacity-75" id="leaderboard">
+        <div class="card-header d-flex justify-content-between fw-bold p-2 ">
+            <button class="btn form-control  btn-outline-primary" id="completedownloadbtn">Download Expenses
+            </button>
         </div>
-    </footer>
+        <div class="card-body" style="overflow-y: auto; max-height: 400px;">
+            <h5 class="text-center">Complete Download History</h5>
+            <ul class="list-group" id="historyplaceholder">
+                <a class="list-group-item list-group-item-action" href="">Nothing downloaded yet</a>
+
+            </ul>
+        </div>
+
+    </div>
+
 
 </body>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
