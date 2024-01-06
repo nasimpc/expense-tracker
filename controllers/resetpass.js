@@ -8,26 +8,27 @@ client.authentications['api-key'].apiKey = process.env.SIB_API_KEY;
 const bcrypt = require('bcrypt');
 const tranEmailApi = new Sib.TransactionalEmailsApi();
 
-exports.resetpasswordform = async (request, response, next) => {
+exports.resetpasswordform = async (req, res, nex) => {
     try {
-        let id = request.params.id;
+        let id = req.params.id;
         const passwordreset = await ForgotPasswords.findByPk(id);
         if (passwordreset.isactive) {
             passwordreset.isactive = false;
             await passwordreset.save();
-            response.sendFile('resetpass.html', { root: 'views' })
+            res.sendFile('resetpass.html', { root: 'views' })
         } else {
-            return response.status(401).json({ message: "Link has been expired" })
+            return res.status(401).json({ message: "Link has been expired" })
         }
 
-    } catch (error) {
+    } catch (err) {
+        console.log(err)
 
     }
 }
 
-exports.requestresetpassword = async (request, response, next) => {
+exports.requestresetpassword = async (req, res, nex) => {
     try {
-        const { email } = request.body;
+        const { email } = req.body;
         const user = await User.findOne({
             where: {
                 email: email
@@ -43,9 +44,9 @@ exports.requestresetpassword = async (request, response, next) => {
                     email: email
                 }
             ]
-            const resetresponse = await user.createForgotpassword({});
-            const { id } = resetresponse;
-            const mailresponse = await tranEmailApi.sendTransacEmail({
+            const resetres = await user.createForgotpassword({});
+            const { id } = resetres;
+            const mailres = await tranEmailApi.sendTransacEmail({
                 sender,
                 to: receivers,
                 subject: "Reset Your password",
@@ -64,22 +65,22 @@ exports.requestresetpassword = async (request, response, next) => {
                     role: id
                 }
             })
-            response.status(200).json({ message: 'Password reset email sent' });
+            res.status(200).json({ message: 'Password reset email sent' });
         } else {
-            response.status(404).json({ message: 'User not found' });
+            res.status(404).json({ message: 'User not found' });
         }
 
 
-    } catch (error) {
-        console.log(error);
-        response.status(500).json({ message: 'Interenal Server Error' });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ message: 'Interenal Server err' });
     }
 }
 
-exports.resetpassword = async (request, response, next) => {
+exports.resetpassword = async (req, res, nex) => {
     try {
 
-        const { resetid, password } = request.body;
+        const { resetid, password } = req.body;
 
         const passwordreset = await ForgotPasswords.findByPk(resetid);
 
@@ -97,16 +98,16 @@ exports.resetpassword = async (request, response, next) => {
                     where: { id: passwordreset.dataValues.userId }
                 }
             );
-            response.status(200).json({ message: "Password reset successful." });
+            res.status(200).json({ message: "Password reset successful." });
         } else {
-            response.status(403).json({ message: "Link has expired" });
+            res.status(403).json({ message: "Link has expired" });
         }
 
 
 
-    } catch (error) {
-        console.error("Error resetting password:", error);
-        response.status(500).json({ message: "Internal server error" });
+    } catch (err) {
+        console.err("err resetting password:", err);
+        res.status(500).json({ message: "Internal server err" });
     }
 };
 

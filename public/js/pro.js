@@ -30,7 +30,7 @@ function showLB(obj, ID = '1qazx234rfvrrf') {
     var b = document.querySelector('#b');
 
     var div0 = document.createElement('div');
-    div0.className = "card col-4 bg-primary-subtle ";
+    div0.className = "card bg-primary-subtle ";
     var div = document.createElement('div');
     div.className = "card-body";
 
@@ -41,18 +41,17 @@ function showLB(obj, ID = '1qazx234rfvrrf') {
 
     a.insertBefore(div0, b);
 }
-// const completedownloadbtn = elements.premiumdiv.querySelector('#completedownloadbtn');
-// const historyplaceholder = elements.premiumdiv.querySelector('#historyplaceholder');
-const completedownloadbtn = document.querySelector('#completedownloadbtn');
+
+const downloadbtn = document.querySelector('#downloadbtn');
 const historyplaceholder = document.querySelector('#historyplaceholder');
-completedownloadbtn.addEventListener('click', downloadData);
+downloadbtn.addEventListener('click', downloadData);
 
 function showDownloadhistory(data) {
 
     if (data.length > 0) {
         historyplaceholder.innerHTML = "";
         data.forEach((ele, index) => {
-            if (index < 10) {
+            if (index < 8) {
                 const date = new Date(ele.createdAt).toLocaleString();
                 const x = document.createElement('a');
                 x.className = "list-group-item text-nowrap";

@@ -9,7 +9,8 @@
         crossorigin="anonymous"></script>
 </head>
 
-<body id="a" class="bg-success-subtle bg-gradient">
+<body class="bg-success-subtle bg-gradient">
+
     <nav class="nav navbar navbar-expand-lg bg-dark-subtle col-12">
         <div class="container text-black p-3 ">
 
@@ -17,21 +18,32 @@
 
         </div>
     </nav>
-    <p id="b"></p>
-    <div class="card bg-primary-subtle bg-opacity-75" id="leaderboard">
-        <div class="card-header d-flex justify-content-between fw-bold p-2 ">
-            <button class="btn form-control  btn-outline-primary" id="completedownloadbtn">Download Expenses
-            </button>
+    <div class="row">
+        <div id="a" class="col m-lg-5">
+            <p id="b"></p>
         </div>
-        <div class="card-body" style="overflow-y: auto; max-height: 400px;">
-            <h5 class="text-center">Complete Download History</h5>
-            <ul class="list-group" id="historyplaceholder">
-                <a class="list-group-item list-group-item-action" href="">Nothing downloaded yet</a>
 
-            </ul>
+        <div class="col card bg-primary-subtle m-lg-5" id="leaderboard">
+            <div class="card-header">
+                <button class="btn form-control  btn-outline-primary" id="downloadbtn">Download Expenses
+                </button>
+            </div>
+            <div class="card-body">
+                <h5 class="text-center">Download History</h5>
+                <ul class="list-group" id="historyplaceholder">
+                    <a class="list-group-item text-nowrap" href="">Nothing downloaded yet</a>
+                </ul>
+            </div>
+
         </div>
 
     </div>
+    <footer class="bg-dark-subtle py-4 fixed-bottom text-black">
+        <div class="container text-center">
+            <p> Copyright © 2023 Simple.in All rights reserved. </p>
+            <p>Contact: nasimpcm@gmail.com </p>
+        </div>
+    </footer>
 
 
 </body>

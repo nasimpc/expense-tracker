@@ -3,7 +3,7 @@ const Order = require('../models/orders');
 const Razorpay = require('razorpay');
 const key_id = process.env.RAZORPAY_KEY_ID;
 const key_secret = process.env.RAZORPAY_KEY_SECRET;
-exports.premiummembership = async (request, response, next) => {
+exports.premiummembership = async (req, res, nex) => {
     try {
         console.log(key_id, key_secret);
         const rzpintance = new Razorpay({
@@ -16,24 +16,23 @@ exports.premiummembership = async (request, response, next) => {
         };
         const orderDetails = await rzpintance.orders.create(options);
         console.log(orderDetails);
-        const user = request.user;
+        const user = req.user;
         const { id, status } = orderDetails;
         await user.createOrder({
             orderid: id,
             status: status,
         })
-        response.status(200).json({ key_id: key_id, orderid: id, user: user });
+        res.status(200).json({ key_id: key_id, orderid: id, user: user });
 
-    } catch (error) {
-        console.log('nasim');
-        console.log(error);
+    } catch (err) {
+        console.log(err);
     }
 }
-exports.updatetransactionstatus = async (request, response, next) => {
-    const { order_id, payment_id, status } = request.body;
+exports.updatetransactionstatus = async (req, res, nex) => {
+    const { order_id, payment_id, status } = req.body;
 
     try {
-        const user = request.user;
+        const user = req.user;
         user.ispremiumuser = true;
         await Promise.all([
             user.save(),
@@ -43,9 +42,9 @@ exports.updatetransactionstatus = async (request, response, next) => {
                 { where: { orderid: order_id } }
             )
         ])
-        response.status(202).json({ success: true, message: "Thank you for being a pro user" });
-    } catch (error) {
-        console.log(error);
-        response.status(500).json({ success: false, message: "Error updating transaction" });
+        res.status(202).json({ success: true, message: "Thank you for being a pro user" });
+    } catch (err) {
+        console.log(err);
+        res.status(500).json({ success: false, message: "err updating transaction" });
     }
 }

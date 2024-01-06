@@ -2,17 +2,17 @@ const User = require('../models/user');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
-exports.getIntroPage = (request, response, next) => {
-    response.sendFile('intro.html', { root: 'views' });
+exports.getIntroPage = (req, res, nex) => {
+    res.sendFile('intro.html', { root: 'views' });
 }
-exports.getProPage = (request, response, next) => {
-    response.sendFile('pro.html', { root: 'views' });
+exports.getProPage = (req, res, nex) => {
+    res.sendFile('pro.html', { root: 'views' });
 }
-exports.getMainPage = (request, response, next) => {
-    response.sendFile('main.html', { root: 'views' });
+exports.getMainPage = (req, res, nex) => {
+    res.sendFile('main.html', { root: 'views' });
 }
 
-exports.addUser = async (req, res, next) => {
+exports.addUser = async (req, res, nex) => {
     try {
 
         const { name, email, password } = req.body;
@@ -78,7 +78,7 @@ exports.login = async (req, res) => {
     }
 }
 
-exports.getcurrentuser = async (request, response, next) => {
-    const user = request.user;
-    response.json({ user });
+exports.getcurrentuser = async (req, res, nex) => {
+    const user = req.user;
+    res.json({ user });
 }

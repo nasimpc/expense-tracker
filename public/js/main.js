@@ -48,7 +48,7 @@ function showNewExpenseOnScreen(obj, ID = '1qazx234rfvrrf') {
     var b = document.querySelector('#b');
 
     var div0 = document.createElement('div');
-    div0.className = "card col-4 bg-primary-subtle";
+    div0.className = "card bg-primary-subtle";
     var div = document.createElement('div');
     div.className = "card-body";
 
