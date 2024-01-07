@@ -7,6 +7,8 @@
     <script defer src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
         crossorigin="anonymous"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/5.3.0/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 </head>
 
 <body class="bg-success-subtle bg-gradient">
@@ -42,6 +44,7 @@
                             <option value="food">food</option>
                             <option value="electricity">electricity</option>
                             <option value="movie">movie</option>
+                            <option value="Other">other</option>
                         </select>
                     </label>
                     <button class="btn btn-primary" style="width: 460px;"> Add Expence </button><br>
@@ -50,22 +53,46 @@
                 </form>
             </div>
         </div>
-        <div id="a" class="col m-lg-5">
+        <div class="col m-lg-5">
             <h2>Expenses</h2>
-            <p id="b"></p>
+            <table id="example" class="table table-striped" style="width:100%">
+                <thead>
+                    <tr>
+                        <th>Expense</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Delete</th>
+                    </tr>
+                </thead>
+                <tbody id="a">
+                </tbody>
+                <tfoot>
+                    <tr>
+                        <th>Expense</th>
+                        <th>Description</th>
+                        <th>Amount</th>
+                        <th>Delete</th>
+                    </tr>
+                </tfoot>
+            </table>
         </div>
     </div>
 
-    <footer class="bg-dark-subtle py-4 fixed-bottom text-black">
+    <!-- <footer class="bg-dark-subtle py-4 fixed-bottom text-black">
         <div class="container text-center">
             <p> Copyright © 2023 Simple.in All rights reserved. </p>
             <p>Contact: nasimpcm@gmail.com </p>
         </div>
-    </footer>
+    </footer> -->
 
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
 <script src="https://cdnjs.cloudflare.com/ajax/libs/axios/1.6.0/axios.min.js"></script>
 <script src="https://checkout.razorpay.com/v1/checkout.js"></script>
+<script src="https://code.jquery.com/jquery-3.7.0.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/jquery.dataTables.min.js"></script>
+<script src="https://cdn.datatables.net/1.13.7/js/dataTables.bootstrap5.min.js"></script>
 <script src="/js/main.js"></script>
 
 </html>

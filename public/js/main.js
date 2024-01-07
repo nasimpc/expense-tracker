@@ -16,7 +16,8 @@ async function saveToStorage(e) {
     }
     const token = localStorage.getItem('token')
     let res = await axios.post(`../expense/add-expense`, obj, { headers: { "Authorization": token } });
-    showNewExpenseOnScreen(res.data.newExpenseDetails)
+    showNewExpenseOnScreen(res.data.newExpenseDetails);
+    new DataTable('#example');
 }
 window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem('token')
@@ -26,6 +27,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         showNewExpenseOnScreen(res.data.allExpenses[i])
 
     }
+    new DataTable('#example');
     const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
     const { name, email, ispremiumuser } = currentuser.data.user;
     if (ispremiumuser == 1) {
@@ -41,32 +43,51 @@ function showNewExpenseOnScreen(obj, ID = '1qazx234rfvrrf') {
     if (obj['id']) {
         ID = obj['id']
     }
-    var newText = document.createTextNode(obj['description'] + ' ' + obj['category'] + ' ' + obj['amount'] + ' ');
 
-    // Add text to div
+    // var newText = document.createTextNode(obj['description'] + ' ' + obj['category'] + ' ' + obj['amount'] + ' ');
+
+    // // Add text to div
+    // 
+
+    // var expenseTr = document.createElement('tr');
+    // div0.className = "card bg-primary-subtle";
+    // var div = document.createElement('div');
+    // div.className = "card-body";
+
+
+    // div.appendChild(newText);
+
+    // //delete btn
+
+
+    // div.appendChild(deleteBtn);
+
+    // div0.appendChild(div);
+
+    // a.insertBefore(div0, b);
     var a = document.querySelector('#a');
-    var b = document.querySelector('#b');
-
-    var div0 = document.createElement('div');
-    div0.className = "card bg-primary-subtle";
-    var div = document.createElement('div');
-    div.className = "card-body";
-
-    div.id = ID;
-    div.appendChild(newText);
-
-    //delete btn
+    var expenseTr = document.createElement('tr');
+    expenseTr.id = ID;
+    var expenseTdexpense = document.createElement('td');
+    expenseTdexpense.appendChild(document.createTextNode(obj['category']));
+    expenseTr.appendChild(expenseTdexpense);
+    var expenseTddescription = document.createElement('td');
+    expenseTddescription.appendChild(document.createTextNode(obj['description']));
+    expenseTr.appendChild(expenseTddescription);
+    var expenseTdamount = document.createElement('td');
+    expenseTdamount.appendChild(document.createTextNode(obj['amount']));
+    expenseTr.appendChild(expenseTdamount);
+    var expenseTddelete = document.createElement('td');
     var deleteBtn = document.createElement('button');
 
     deleteBtn.className = 'btn btn-sm btn-danger float-right delete';
 
     deleteBtn.appendChild(document.createTextNode('X'));
+    expenseTddelete.appendChild(deleteBtn);
 
-    div.appendChild(deleteBtn);
+    expenseTr.appendChild(expenseTddelete);
 
-    div0.appendChild(div);
-
-    a.insertBefore(div0, b);
+    a.appendChild(expenseTr);
 }
 // Remove item
 function editItem(e) {
