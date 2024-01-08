@@ -5,7 +5,7 @@ const sequelize = require('../util/database');
 exports.addExpense = async (req, res, next) => {
     let transaction;
     try {
-        transaction = await sequelize.transaction();
+        transzaction = await sequelize.transaction();
         const { amount, description, category } = req.body;
         const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id }, { transaction });
         const totalExpenses = await Expense.sum('amount', { where: { UserId: req.user.id } });
@@ -14,7 +14,7 @@ exports.addExpense = async (req, res, next) => {
         res.status(201).json({ newExpenseDetails: data });
     }
     catch (err) {
-        console.log(err);
+        console.log(err, 'nasim');
         if (transaction) {
             await transaction.rollback();
         }
