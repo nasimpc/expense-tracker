@@ -2,16 +2,17 @@
 window.addEventListener("DOMContentLoaded", async () => {
     //window.location.href = "proPage"
     let res = await axios.get('../premium/leaderborddata');
-    var a = document.querySelector('#a');
-    var b = document.querySelector('#b');
-    var headingLB = document.createElement('h2');
-    headingLB.innerHTML = "Expense LeaderBoard";
-    a.insertBefore(headingLB, b);
+    // var a = document.querySelector('#a');
+    // var b = document.querySelector('#b');
+    // var headingLB = document.createElement('h2');
+    // headingLB.innerHTML = "Expense LeaderBoard";
+    // a.insertBefore(headingLB, b);
     for (var i = 0; i < res.data.length; i++) {
         showLB(res.data[i]);
-        console.log(res.data[i]);
 
     }
+    new DataTable('#example');
+
     const token = localStorage.getItem('token')
     const downloadhistory = await axios.get('../premium/downloadhistory', { headers: { "Authorization": token } });
     showDownloadhistory(downloadhistory.data);
@@ -23,23 +24,34 @@ function showLB(obj, ID = '1qazx234rfvrrf') {
     if (obj['id']) {
         ID = obj['id']
     }
-    var newText = document.createTextNode('name: ' + obj['name'] + ' Totel Expense: ' + obj['totalExpenses'] + ' ');
+    // var newText = document.createTextNode('name: ' + obj['name'] + ' Totel Expense: ' + obj['totalExpenses'] + ' ');
 
-    // Add text to div
+    // // Add text to div
+    // var a = document.querySelector('#a');
+    // var b = document.querySelector('#b');
+
+    // var div0 = document.createElement('div');
+    // div0.className = "card bg-primary-subtle ";
+    // var div = document.createElement('div');
+    // div.className = "card-body";
+
+    // div.id = ID;
+    // div.appendChild(newText);
+
+    // div0.appendChild(div);
+
+    // a.insertBefore(div0, b);
     var a = document.querySelector('#a');
-    var b = document.querySelector('#b');
+    var lbtr = document.createElement('tr');
+    lbtr.id = ID;
+    var nametd = document.createElement('td');
+    nametd.appendChild(document.createTextNode(obj['name']));
+    lbtr.appendChild(nametd);
+    var totalexpensetd = document.createElement('td');
+    totalexpensetd.appendChild(document.createTextNode(obj['totalExpenses']));
+    lbtr.appendChild(totalexpensetd);
 
-    var div0 = document.createElement('div');
-    div0.className = "card bg-primary-subtle ";
-    var div = document.createElement('div');
-    div.className = "card-body";
-
-    div.id = ID;
-    div.appendChild(newText);
-
-    div0.appendChild(div);
-
-    a.insertBefore(div0, b);
+    a.appendChild(lbtr);
 }
 
 const downloadbtn = document.querySelector('#downloadbtn');

@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/1.13.7/css/dataTables.bootstrap5.min.css">
 </head>
 
-<body class="bg-success-subtle bg-gradient">
+<body class="">
     <nav class="nav navbar navbar-expand-lg bg-dark-subtle col-12">
         <div class="container text-black p-3 ">
 
@@ -22,35 +22,44 @@
 
         </div>
     </nav>
+
     <div class="row">
-        <div class="col card bg-primary-subtle m-lg-5" style="width: 500px">
-            <div class="card-body">
-                <h2 id="logoName" class="card-title">Expenses Tracker</h2>
+        <div class="col">
+            <div class="card bg-primary-subtle m-lg-5">
+                <div class="card-header">
+                    <h2 id="logoName" class="card-title">Expenses Tracker</h2>
+                </div>
+                <div class="card-body">
+
+                    <form onsubmit="saveToStorage(event)">
+                        <label calss="form-label"> Expense amount</label>
+                        <input id="amount" class="form-control" type="number" name="amount" required />
+                        <label calss="form-label"> Choose description</label>
+                        <input id="description" class="form-control" type="text" name="description" required />
+                        <label calss="form-label"> Payment method</label>
+                        <input id="paymentMethod" class="form-control" type="text" name="paymentMethod" required />
+
+                        <label calss="form-control" style="width:460px">Choose category
+                            <select id="category" class="form-select" name="category">
+                                <option value="" selected="selected">Select One</option>
+                                <option value="fuel">fuel</option>
+                                <option value="food">food</option>
+                                <option value="electricity">electricity</option>
+                                <option value="movie">movie</option>
+                                <option value="Other">other</option>
+                            </select>
+                        </label>
+                        <label class="form-label"></label>
+                        <button class="btn btn-primary form-control"> Signup </button><br>
 
 
-
-                <form onsubmit="saveToStorage(event)">
-                    <label calss="form-label"> Expense amount</label>
-                    <input id="amount" class="form-control" type="number" name="amount" required />
-                    <label calss="form-label"> Choose description</label>
-                    <input id="description" class="form-control" type="text" name="description" required />
-                    <label calss="form-label"> Payment method</label>
-                    <input id="paymentMethod" class="form-control" type="text" name="paymentMethod" required />
-
-                    <label calss="form-label" style="width:460px">Choose category
-                        <select id="category" class="form-select" name="category">
-                            <option value="" selected="selected">Select One</option>
-                            <option value="fuel">fuel</option>
-                            <option value="food">food</option>
-                            <option value="electricity">electricity</option>
-                            <option value="movie">movie</option>
-                            <option value="Other">other</option>
-                        </select>
-                    </label>
-                    <button class="btn btn-primary" style="width: 460px;"> Add Expence </button><br>
-
-
-                </form>
+                    </form>
+                </div>
+            </div>
+            <div class="card m-lg-5">
+                <div class="card-body">
+                    <img src="/images/primary.jpg" alt="" class="img-fluid d-none d-sm-block">
+                </div>
             </div>
         </div>
         <div class="col m-lg-5">
@@ -78,12 +87,13 @@
         </div>
     </div>
 
-    <!-- <footer class="bg-dark-subtle py-4 fixed-bottom text-black">
+    <footer class="bg-dark-subtle bg-opacity-100 py-4 text-black">
+        <!-- Footer Content Here -->
         <div class="container text-center">
             <p> Copyright © 2023 Simple.in All rights reserved. </p>
-            <p>Contact: nasimpcm@gmail.com </p>
+            <p> Contact: nasimpcm@gmail.com </p>
         </div>
-    </footer> -->
+    </footer>
 
 </body>
 

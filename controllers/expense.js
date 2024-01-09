@@ -5,7 +5,7 @@ const sequelize = require('../util/database');
 exports.addExpense = async (req, res, next) => {
     let transaction;
     try {
-        transzaction = await sequelize.transaction();
+        transaction = await sequelize.transaction();
         const { amount, description, category } = req.body;
         const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id }, { transaction });
         const totalExpenses = await Expense.sum('amount', { where: { UserId: req.user.id } });

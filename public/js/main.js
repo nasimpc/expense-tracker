@@ -17,7 +17,7 @@ async function saveToStorage(e) {
     const token = localStorage.getItem('token')
     let res = await axios.post(`../expense/add-expense`, obj, { headers: { "Authorization": token } });
     showNewExpenseOnScreen(res.data.newExpenseDetails);
-    new DataTable('#example');
+    // new DataTable('#example');
 }
 window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem('token')
