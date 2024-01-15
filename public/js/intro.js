@@ -27,11 +27,14 @@ async function login(e) {
 async function forgetPass(e) {
     e.preventDefault();
     const email = e.target.forgetEmail.value;
+
     try {
         const data = {
             email: email,
         }
+
         const res = await axios.post('../password/forgotpassword', data);
+        console.log(res);
 
     }
     catch (err) {
@@ -65,10 +68,10 @@ async function signup(e) {
     }
 }
 async function loginPage(e) {
-    document.getElementById('loginDiv').className = "card bg-primary-subtle m-lg-5";
-    document.getElementById('signupDiv').className = "card bg-primary-subtle m-lg-5 collapse";
+    document.getElementById('loginDiv').className = "card bg-info-subtle m-lg-5";
+    document.getElementById('signupDiv').className = "card bg-info-subtle m-lg-5 collapse";
 }
 async function signupPage(e) {
-    document.getElementById('signupDiv').className = "card bg-primary-subtle m-lg-5";
-    document.getElementById('loginDiv').className = "card bg-primary-subtle m-lg-5 collapse";
+    document.getElementById('signupDiv').className = "card bg-info-subtle m-lg-5";
+    document.getElementById('loginDiv').className = "card bg-info-subtle m-lg-5 collapse";
 }

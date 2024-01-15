@@ -3,7 +3,7 @@ const User = require('../models/user');
 const sequelize = require('../util/database');
 
 exports.addExpense = async (req, res, next) => {
-    let transaction;
+    let transaction;//pcm
     try {
         transaction = await sequelize.transaction();
         const { amount, description, category } = req.body;

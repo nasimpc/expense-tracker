@@ -20,7 +20,17 @@ async function saveToStorage(e) {
     // new DataTable('#example');
 }
 window.addEventListener("DOMContentLoaded", async () => {
+    //token for authentication
     const token = localStorage.getItem('token')
+    //checking for pro sub
+    const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
+    const { name, email, ispremiumuser } = currentuser.data.user;
+    if (ispremiumuser == 1) {
+        document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
+        document.getElementById('rzp-button1').remove();
+        document.getElementById('rzp-button2').className = "btn float-end premium btn-info";
+    }
+    //show expenses
     let res = await axios.get(`../expense/get-expenses`, { headers: { "Authorization": token } });
 
     for (var i = 0; i < res.data.allExpenses.length; i++) {
@@ -28,13 +38,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     }
     new DataTable('#example');
-    const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
-    const { name, email, ispremiumuser } = currentuser.data.user;
-    if (ispremiumuser == 1) {
-        document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
-        document.getElementById('rzp-button1').remove();
-        document.getElementById('rzp-button2').className = "btn float-end premium btn-success";
-    }
+
 
 })
 
@@ -50,7 +54,7 @@ function showNewExpenseOnScreen(obj, ID = '1qazx234rfvrrf') {
     // 
 
     // var expenseTr = document.createElement('tr');
-    // div0.className = "card bg-primary-subtle";
+    // div0.className = "card bg-info-subtle";
     // var div = document.createElement('div');
     // div.className = "card-body";
 
@@ -96,7 +100,8 @@ function editItem(e) {
             const token = localStorage.getItem('token')
             var div = e.target.parentElement.parentElement;
             body.removeChild(div);
-            var id = e.target.parentElement.id;
+            var id = e.target.parentElement.parentElement.id;
+            console.log(id);
             axios.delete(`../expense/delete-expense/${id}`, { headers: { "Authorization": token } });
         }
     }
@@ -129,7 +134,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
 
                 document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
                 document.getElementById('rzp-button1').remove();
-                document.getElementById('rzp-button2').className = "btn float-end premium btn-success";
+                document.getElementById('rzp-button2').className = "btn float-end premium btn-info";
 
                 alert(premiumstatus.data.message);
                 // window.location.href = "user";

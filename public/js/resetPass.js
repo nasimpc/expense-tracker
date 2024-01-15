@@ -1,6 +1,3 @@
-const { response } = require("express");
-
-//complete this file
 async function resetPass(e) {
     const parts = window.location.href.split('/');
     const lastPart = parts[parts.length - 1];
