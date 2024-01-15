@@ -58,7 +58,7 @@ exports.requestresetpassword = async (req, res, nex) => {
                     <title>Password Reset</title>
                 </head>
                 <body>
-                    <h1>Reset Password of your Simple expense tracker</h1>
+                    <h1>Reset Simple Expense Tracker password</h1>
                     <p>Click the button below to reset your password:</p>
                     <button><a href="${process.env.WEBSITE}/password/reset/{{params.role}}">Reset Password</a></button>
                 </body>
