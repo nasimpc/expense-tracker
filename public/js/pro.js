@@ -11,7 +11,9 @@ window.addEventListener("DOMContentLoaded", async () => {
         showLB(res.data[i]);
 
     }
-    new DataTable('#example');
+    new DataTable('#example', {
+        order: [[1, 'desc']]
+    });
 
     const token = localStorage.getItem('token')
     const downloadhistory = await axios.get('../premium/downloadhistory', { headers: { "Authorization": token } });
