@@ -37,7 +37,12 @@ window.addEventListener("DOMContentLoaded", async () => {
         showNewExpenseOnScreen(res.data.allExpenses[i])
 
     }
-    new DataTable('#example');
+    new DataTable('#example', {
+        lengthMenu: [
+            [10, 15, 20],
+            [10, 15, 20]
+        ]
+    });
 
 
 })

@@ -12,7 +12,11 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     }
     new DataTable('#example', {
-        order: [[1, 'desc']]
+        order: [[1, 'desc']],
+        lengthMenu: [
+            [5, 10, 15],
+            [5, 10, 15]
+        ]
     });
 
     const token = localStorage.getItem('token')
