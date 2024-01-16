@@ -22,9 +22,12 @@ const purchaseRouter = require('./routes/purchase');
 const expenseRoutes = require('./routes/expense');
 const passwordRoutes = require('./routes/resetpass');
 
+//const accessLogStream = fs.createWriteStream(path.join(__dirname, 'access.log'), { flags: 'a' });
+
 const app = express();
 app.use(cors());
 //app.use(helmet());
+//app.use(morgan('combined', { stream: accessLogStream }));
 
 app.use(bodyParser.json({ extended: false }));
 app.use(express.static('public'));

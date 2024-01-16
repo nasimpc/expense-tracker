@@ -3,10 +3,8 @@ const ForgotPasswords = require('../models/forgotpasswords');
 
 
 const Sib = require('sib-api-v3-sdk');
-
 const client = Sib.ApiClient.instance;
 client.authentications['api-key'].apiKey = process.env.SIB_API_KEY;
-
 const bcrypt = require('bcrypt');
 const tranEmailApi = new Sib.TransactionalEmailsApi();
 
@@ -60,7 +58,7 @@ exports.requestresetpassword = async (req, res, nex) => {
                     <title>Password Reset</title>
                 </head>
                 <body>
-                    <h1>Reset "Simple Expense Tracker" password</h1>
+                    <h1>Reset Simple Expense Tracker password</h1>
                     <p>Click the button below to reset your password:</p>
                     <button><a href="${process.env.WEBSITE}/password/reset/{{params.role}}">Reset Password</a></button>
                 </body>

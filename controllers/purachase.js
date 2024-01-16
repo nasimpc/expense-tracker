@@ -3,10 +3,9 @@ const Order = require('../models/orders');
 const Razorpay = require('razorpay');
 const key_id = process.env.RAZORPAY_KEY_ID;
 const key_secret = process.env.RAZORPAY_KEY_SECRET;
-
 exports.premiummembership = async (req, res, nex) => {
     try {
-        // console.log(key_id, key_secret);
+        console.log(key_id, key_secret);
         const rzpintance = new Razorpay({
             key_id: key_id,
             key_secret: key_secret
@@ -16,7 +15,7 @@ exports.premiummembership = async (req, res, nex) => {
             currency: "INR",
         };
         const orderDetails = await rzpintance.orders.create(options);
-        //console.log(orderDetails);
+        console.log(orderDetails);
         const user = req.user;
         const { id, status } = orderDetails;
         await user.createOrder({
