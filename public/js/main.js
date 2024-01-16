@@ -19,6 +19,7 @@ async function saveToStorage(e) {
 }
 window.addEventListener("DOMContentLoaded", async () => {
     //token for authentication
+
     const token = localStorage.getItem('token')
     //checking for pro sub
     const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
@@ -38,6 +39,7 @@ window.addEventListener("DOMContentLoaded", async () => {
 
     }
     new DataTable('#example', {
+
         lengthMenu: [
             [10, 15, 20],
             [10, 15, 20]

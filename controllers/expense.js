@@ -6,10 +6,10 @@ exports.addExpense = async (req, res, next) => {
     let transaction;//pcm
     try {
         transaction = await sequelize.transaction();
-        const user = req.user;
+        //const user = req.user;
         const { amount, description, category } = req.body;
-        //const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id }, { transaction });
-        const data = await user.createExpense({ amount: amount, description: description, category: category }, { transaction });
+        const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id }, { transaction });
+        // const data = await user.createExpense({ amount: amount, description: description, category: category }, { transaction });
         var totalExpenses = await Expense.sum('amount', { where: { UserId: req.user.id } });
         totalExpenses = Number(totalExpenses);
         totalExpenses += Number(amount);
