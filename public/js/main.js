@@ -6,6 +6,8 @@ async function saveToStorage(e) {
     const amount = event.target.amount.value;
     const description = event.target.description.value;
     const category = event.target.category.value;
+    //const userid = ;
+
 
     const obj = {
         amount: amount,
@@ -15,11 +17,10 @@ async function saveToStorage(e) {
     const token = localStorage.getItem('token')
     let res = await axios.post(`../expense/add-expense`, obj, { headers: { "Authorization": token } });
     showNewExpenseOnScreen(res.data.newExpenseDetails);
-
+    // new DataTable('#example');
 }
 window.addEventListener("DOMContentLoaded", async () => {
     //token for authentication
-
     const token = localStorage.getItem('token')
     //checking for pro sub
     const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
@@ -30,16 +31,13 @@ window.addEventListener("DOMContentLoaded", async () => {
         document.getElementById('rzp-button2').className = "btn float-end premium btn-info";
     }
     //show expenses
-    const currentPage = 1;
-    const noitem = 1000;
-    let res = await axios.get(`../expense/get-expenses?page=${currentPage}&noitem=${noitem}`, { headers: { "Authorization": token } });
+    let res = await axios.get(`../expense/get-expenses`, { headers: { "Authorization": token } });
 
     for (var i = 0; i < res.data.allExpenses.length; i++) {
         showNewExpenseOnScreen(res.data.allExpenses[i])
 
     }
     new DataTable('#example', {
-
         lengthMenu: [
             [10, 15, 20],
             [10, 15, 20]
@@ -123,7 +121,9 @@ document.getElementById('rzp-button1').onclick = async function (e) {
                 'Authorization': token
             }
         });
-
+        // clearFields();
+        // successDiv3.classList.remove('d-none');
+        // successDiv3.classList.add('d-block');
         const { key_id, orderid } = response.data;
         const { name, email } = response.data.user;
         var options = {
@@ -142,7 +142,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
                 document.getElementById('rzp-button2').className = "btn float-end premium btn-info";
 
                 alert(premiumstatus.data.message);
-
+                // window.location.href = "user";
             },
             "prefill": {
                 "name": name,
@@ -163,7 +163,7 @@ document.getElementById('rzp-button1').onclick = async function (e) {
                 payment_id: response.error.metadata.payment_id,
                 status: "faild"
             }, { headers: { 'Authorization': token } });
-            alert('Something went wrong Transaction failed');
+            alert('Something went wrong Transaction failed hi3');
 
         });
 

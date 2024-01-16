@@ -72,7 +72,7 @@ function showDownloadhistory(data) {
             if (index < 8) {
                 const date = new Date(ele.createdAt).toLocaleString();
                 const x = document.createElement('a');
-                x.className = "list-group-item";
+                x.className = "list-group-item text-nowrap";
                 x.href = `${ele.downloadUrl}`
                 x.innerHTML = `${date}`;
                 historyplaceholder.appendChild(x);
