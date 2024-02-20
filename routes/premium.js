@@ -1,8 +1,6 @@
 const express = require('express');
-
 const premiumController = require('../controllers/premium');
-const userauthentication = require('../middleware/auth');
-
+const userauthentication = require('../middleware/authentication');
 const router = express.Router();
 
 router.get('/leaderborddata', premiumController.getLeaderboardExpenses);

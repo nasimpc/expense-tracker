@@ -24,6 +24,7 @@ window.addEventListener("DOMContentLoaded", async () => {
     const token = localStorage.getItem('token')
     //checking for pro sub
     const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
+    console.log(currentuser.data.user);
     const { name, email, ispremiumuser } = currentuser.data.user;
     if (ispremiumuser == 1) {
         document.getElementById('logoName').innerHTML = "Expense Tracker Pro";
@@ -31,6 +32,7 @@ window.addEventListener("DOMContentLoaded", async () => {
         document.getElementById('rzp-button2').className = "btn float-end premium btn-info";
     }
     //show expenses
+
     let res = await axios.get(`../expense/get-expenses`, { headers: { "Authorization": token } });
 
     for (var i = 0; i < res.data.allExpenses.length; i++) {
@@ -49,8 +51,8 @@ window.addEventListener("DOMContentLoaded", async () => {
 
 //show details on screen
 function showNewExpenseOnScreen(obj, ID = '1qazx234rfvrrf') {
-    if (obj['id']) {
-        ID = obj['id']
+    if (obj['_id']) {
+        ID = obj['_id']
     }
 
     // var newText = document.createTextNode(obj['description'] + ' ' + obj['category'] + ' ' + obj['amount'] + ' ');

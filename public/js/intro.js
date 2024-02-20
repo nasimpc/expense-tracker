@@ -1,3 +1,27 @@
+async function signup(e) {
+    e.preventDefault();
+    const name = e.target.name.value;
+    const email = e.target.email.value;
+    const password = e.target.password.value;
+
+    const obj = {
+        name: name,
+        email: email,
+        password: password,
+    }
+    try {
+        let res = await axios.post(`../user/add-user`, obj);
+        alert(res.data.message)
+        console.log(res);
+        localStorage.setItem('token', res.data.token);
+        window.location.href = "mainPage"
+    }
+    catch (err) {
+        //console.log("hi1", err);
+        confirm('User already exists!');
+
+    }
+}
 async function login(e) {
     e.preventDefault();
     const email = e.target.email.value;
@@ -43,30 +67,7 @@ async function forgetPass(e) {
     }
 
 }
-async function signup(e) {
-    e.preventDefault();
-    const name = e.target.name.value;
-    const email = e.target.email.value;
-    const password = e.target.password.value;
 
-    const obj = {
-        name: name,
-        email: email,
-        password: password,
-    }
-    try {
-        let res = await axios.post(`../user/add-user`, obj);
-        alert(res.data.message)
-        console.log(res);
-        localStorage.setItem('token', res.data.token);
-        window.location.href = "mainPage"
-    }
-    catch (err) {
-        //console.log("hi1", err);
-        confirm('User already exists!');
-
-    }
-}
 async function loginPage(e) {
     document.getElementById('loginDiv').className = "card bg-info-subtle m-lg-5";
     document.getElementById('signupDiv').className = "card bg-info-subtle m-lg-5 collapse";

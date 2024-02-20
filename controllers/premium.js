@@ -1,53 +1,49 @@
-
 const User = require('../models/user');
-const AwsService = require('../services/awsservices');
+const Expenses = require('../models/expense');
+const AwsService = require('../services/aws-services');
 
 exports.getLeaderboardExpenses = async (req, res, nex) => {
   try {
-    const leaderboard = await User.findAll({
-      attributes: ['id', 'name', 'totalExpenses'],
-      order: [['totalExpenses', 'DESC']],
-      limit: 5
-    });
+    const leaderboard = await User.find({})
+      .select('name totalExpenses')
+      .sort({ totalexpenses: -1 })
+      .limit(15);
     return res.status(200).json(leaderboard);
   } catch (err) {
     console.log(err);
-    return res.status(401).json({ message: 'Unauthorized - please relogin' });
+    return res.status(400).json({ message: 'An error occurred' });
   }
 };
 
 exports.getDownloadhistory = async (req, res, nex) => {
   try {
-    const user = req.user;
-    const history = await user.getDownloads();
-    res.status(200).json(history);
-
+    const { user: { downloadUrl } } = req;
+    res.status(200).json({ history: downloadUrl });
   } catch (err) {
     console.log(err);
-    return res.status(401).json({ message: 'Unable to fetch history' });
+    return res.status(400).json({ message: 'Unable to fetch history' });
   }
 }
 
 exports.getDownloadURL = async (req, res, nex) => {
   try {
     const user = req.user;
-    const expenses = await user.getExpenses({
-      attributes: ["amount", "description", "category"],
-    });
+    const expenses = await Expenses.find({ "userId": user._id })
     const formattedExpenses = expenses.map(expense => {
-      return `Amount: ${expense.amount}
-    Description: ${expense.description}
-    Category: ${expense.category}
-    `;
+      return `Category: ${expense.category}
+      Payment Method: ${expense.pmethod}
+      Amount: ${expense.amount}
+      Date: ${expense.date}
+      `;
     });
     const textData = formattedExpenses.join("\n");
-
-
     const filename = `expense/user${user.id}/${user.name}${new Date()}.txt`;
     const URL = await AwsService.uploadToS3(textData, filename);
-    await user.createDownload({
-      downloadUrl: URL
+    user.downloadUrl.push({
+      url: URL,
+      createdAt: new Date()
     })
+    await user.save();
     res.status(200).json({ URL, success: true });
   } catch (err) {
     console.log(err);

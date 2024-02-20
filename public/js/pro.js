@@ -65,10 +65,10 @@ const historyplaceholder = document.querySelector('#historyplaceholder');
 downloadbtn.addEventListener('click', downloadData);
 
 function showDownloadhistory(data) {
-
-    if (data.length > 0) {
+    console.log(data.history, "hi2");
+    if (data.history.length > 0) {
         historyplaceholder.innerHTML = "";
-        data.forEach((ele, index) => {
+        data.history.forEach((ele, index) => {
             if (index < 8) {
                 const date = new Date(ele.createdAt).toLocaleString();
                 const x = document.createElement('a');
@@ -83,11 +83,13 @@ function showDownloadhistory(data) {
 }
 async function downloadData(e) {
     try {
+        console.log('hi');
         const token = localStorage.getItem('token')
         e.preventDefault();
         let response = await axios.get('../premium/download', { headers: { "Authorization": token } });
         window.location.href = response.data.URL;
         const downloadhistory = await axios.get('../premium/downloadhistory', { headers: { "Authorization": token } });
+        console.log(downloadhistory.data);
         showDownloadhistory(downloadhistory.data);
     } catch (error) {
         console.log(error);

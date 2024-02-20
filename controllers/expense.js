@@ -1,56 +1,52 @@
 const Expense = require('../models/expense');
-const User = require('../models/user');
-const sequelize = require('../util/database');
 
 exports.addExpense = async (req, res, next) => {
-    let transaction;//pcm
     try {
-        transaction = await sequelize.transaction();
-        const { amount, description, category } = req.body;
-        const data = await Expense.create({ amount: amount, description: description, category: category, userId: req.user.id }, { transaction });
-        let totalExpenses = await Expense.sum('amount', { where: { UserId: req.user.id } });
-        totalExpenses = Number(totalExpenses);
-        totalExpenses += Number(amount);
-        await req.user.update({ totalExpenses: totalExpenses }, { transaction });
-        await transaction.commit();
-        res.status(201).json({ newExpenseDetails: data });
+        const { user } = req;
+        const { amount, description, category, date } = req.body;
+        const expense = new Expense({ userId: user, amount, description, category, date, })
+        const data = await expense.save();
+        await user.updateTotal();
+        res.status(200).json({ message: 'Expense successfully added', newExpenseDetails: data });
     }
     catch (err) {
-        console.log(err, 'nasim');
-        if (transaction) {
-            await transaction.rollback();
-        }
+        console.log(err);
         res.status(500).json({ message: 'An error occurred' });
     }
 }
 
 exports.getExpense = async (req, res, next) => {
     try {
-        const expenses = await Expense.findAll({ where: { userId: req.user.id } });
-        res.status(200).json({ allExpenses: expenses });
+        const page = req.query.page;
+        const user = req.user;
+        // const limit = Number(req.query.noitem);
+        // const offset = (page - 1) * 5;
+        const limit = 100;
+        const offset = 0;
+        const expenses = await Expense.find({ "userId": user._id }).skip(offset).limit(limit);
+        console.log(expenses)
+        res.status(200).json({
+            allExpenses: expenses,
+            hasMoreExpenses: expenses.length === limit,
+            hasPreviousExpenses: page > 1
+        });
     }
     catch (err) {
-        console.log('Get user is failing', JSON.stringify(err));
-        res.status(500).json({ error: err });
+        console.log(err);
+        res.status(500).json({ message: 'An error occurred' });
     }
 }
 
 exports.deleteExpense = async (req, res) => {
-    let transaction;
     try {
-        transaction = await sequelize.transaction();
         const eId = req.params.id;
-        await Expense.destroy({ where: { id: eId } }, { transaction });
-        const totalExpenses = await Expense.sum('amount', { where: { UserId: req.user.id } });
-        await req.user.update({ totalExpenses: totalExpenses }, { transaction });
-        await transaction.commit();
-        res.sendStatus(200);
+        const { user } = req;
+        await Expense.findByIdAndDelete(eId)
+        await user.updateTotal();
+        return res.status(200).json({ message: 'Succeffully deleted' });
     }
     catch (err) {
         console.log(err);
-        if (transaction) {
-            await transaction.rollback();
-        }
-        res.status(500).json(err);
+        res.status(500).json({ message: 'An error occurred' });
     }
 }
