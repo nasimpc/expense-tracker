@@ -64,7 +64,6 @@ exports.resetPasswordForm = async (req, res, nex) => {
         });
         const { forgotPassword } = user;
         const passwordreset = forgotPassword.find(item => item._id.equals(new ObjectId(id)));
-        console.log(passwordreset);
         if (passwordreset.isActive) {
             passwordreset.isActive = false;
             await user.save();
@@ -100,14 +99,6 @@ exports.resetPassword = async (req, res, nex) => {
             const hashedPassword = await bcrypt.hash(password, 10);
             user.password = hashedPassword;
             await user.save();
-            // await User.update(
-            //     {
-            //         password: hashedPassword
-            //     },
-            //     {
-            //         where: { id: passwordreset.dataValues.userId }
-            //     }
-            // );
             res.status(200).json({ message: "Password reset successful." });
         } else {
             res.status(400).json({ message: "Link has expired" });

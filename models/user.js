@@ -39,7 +39,7 @@ const userSchema = new Schema({
             type: Date,
         }
     }],
-    order: {
+    order: [{
         order_id: {
             type: String
         },
@@ -52,7 +52,7 @@ const userSchema = new Schema({
         createdAt: {
             type: Date
         }
-    }
+    }]
 
 });
 userSchema.methods.updateTotal = async function () {

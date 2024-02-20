@@ -15,8 +15,11 @@ exports.premiumMembership = async (req, res, nex) => {
         const orderDetails = await rzpintance.orders.create(options);
         const user = req.user;
         const { id, status } = orderDetails;
-        user.order.order_id = id;
-        user.order.status = status;
+        user.order.push({
+            order_id: id,
+            status: status,
+            createdAt: new Date()
+        })
         await user.save();
         const userData = {
             name: user.name,
@@ -30,28 +33,25 @@ exports.premiumMembership = async (req, res, nex) => {
 }
 exports.updateTransactionStatus = async (req, res, nex) => {
     const { order_id, payment_id, status } = req.body;
-
     try {
-        // const user = req.user;
-        // user.ispremiumuser = true;
-        // await Promise.all([
-        //     user.save(),
-        //     Order.update(
-
-        //         { paymentid: payment_id, status: status },
-        //         { where: { orderid: order_id } }
-        //     )
-        // ])
+        console.log(req.user.order, order_id);
         const { user } = req;
         const { order } = user;
+        let currOrder;
+        for (let i = 0; i < order.length; i++) {
+            if (order[i].order_id == order_id) {
+                currOrder = order[i];
+                break;
+            }
+        }
         user.ispremiumuser = true;
-        order.payment_id = payment_id;
-        order.status = status;
-        order.createdAt = new Date();
+        currOrder.payment_id = payment_id;
+        currOrder.status = status;
+        currOrder.createdAt = new Date();
         await user.save();
         res.status(200).json({ success: true, message: "Thank you for being a pro user" });
     } catch (err) {
         console.log(err);
-        res.status(500).json({ success: false, message: "err updating transaction" });
+        res.status(500).json({ success: false, message: "An error occured" });
     }
 }
