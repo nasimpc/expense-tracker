@@ -16,9 +16,9 @@
         <div class="container text-black p-3 ">
 
             <h2>Expense Tracker</h2>
-            <button class="invisible" id="rzp-button2"> Pro Page</button>
-            <button class="btn float-end premium btn-info" id="rzp-button1"> Buy Premium </button>
-
+            <img src="/images/profil_pic.jpeg" onclick="showingProfileModel()" alt="" data-bs-dismiss="modal"
+                data-bs-toggle="modal" data-bs-target="#profilModal" class="rounded-circle rounded-circle"
+                style="height: 7vh;">
 
         </div>
     </nav>
@@ -27,7 +27,14 @@
         <div class="col">
             <div class="card bg-info-subtle m-lg-5">
                 <div class="card-header">
+                    <button class="invisible" id="rzp-button2"> Pro Page 👉</button>
+                    <button class="btn float-end premium btn-info" id="rzp-button1"> Buy Premium 🙂</button>
                     <h2 id="logoName" class="card-title">Expenses Tracker</h2>
+
+
+
+
+
                 </div>
                 <div class="card-body">
 
@@ -39,7 +46,7 @@
                         <label calss="form-label"> Payment method</label>
                         <input id="paymentMethod" class="form-control" type="text" name="paymentMethod" required />
 
-                        <label calss="form-control" style="width:460px">Choose category
+                        <label calss="form-control" style="width:280px">Choose category
                             <select id="category" class="form-select" name="category">
                                 <option value="" selected="selected">Select One</option>
                                 <option value="fuel">fuel</option>
@@ -49,7 +56,7 @@
                                 <option value="Other">other</option>
                             </select>
                         </label>
-                        <label class="form-label"></label>
+                        <p></p>
                         <button class="btn btn-info form-control"> Submit </button><br>
 
 
@@ -63,27 +70,55 @@
             </div>
         </div>
         <div class="col m-lg-5">
-            <h2>Expenses</h2>
-            <table id="example" class="table table-striped" style="width:100%">
-                <thead>
-                    <tr>
-                        <th>Expense</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Delete</th>
-                    </tr>
-                </thead>
-                <tbody id="a">
-                </tbody>
-                <tfoot>
-                    <tr>
-                        <th>Expense</th>
-                        <th>Description</th>
-                        <th>Amount</th>
-                        <th>Delete</th>
-                    </tr>
-                </tfoot>
-            </table>
+            <div class="card  bg-light" style="width: 700px">
+                <div class="card-body">
+                    <h2>Expenses</h2>
+                    <table id="example" class="table table-striped" style="width:100%">
+                        <thead>
+                            <tr>
+                                <th>Expense</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Delete</th>
+                            </tr>
+                        </thead>
+                        <tbody id="a">
+                        </tbody>
+                        <tfoot>
+                            <tr>
+                                <th>Expense</th>
+                                <th>Description</th>
+                                <th>Amount</th>
+                                <th>Delete</th>
+                            </tr>
+                        </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+    </div>
+    <div class="modal fade" id="profilModal">
+        <div class="modal-dialog modal-dialog-centered" style="width: 50vh;">
+            <div class="modal-content p-1">
+                <div class="modal-body  bg-info-subtle p-1">
+                    <div class="card">
+                        <div class="card-body text-center">
+                            <img src="/images/profil_pic.jpeg" alt="" class="rounded-circle rounded-circle"
+                                style="height: 15vh;">
+                            <ul class="list-group" id="historyplaceholder">
+                                <a id="profile_model_name" class="list-group-item text-nowrap">Name: nasim</a>
+                                <a id="profile_model_email" class="list-group-item text-nowrap">Email:
+                                    nasimpcm@gmail.com</a>
+                                <a id="profile_model_phno" class="list-group-item text-nowrap">Phno: 6235094897</a>
+                                <a class="list-group-item text-nowrap">Edit Profile</a>
+                                <a class="list-group-item text-nowrap">Help</a>
+                                <a class="list-group-item text-nowrap bg-danger" href="/user/intro">Logout</a>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 

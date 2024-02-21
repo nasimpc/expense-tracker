@@ -24,13 +24,18 @@
     <div class=" ">
         <div class="row">
 
-            <div class="col-md-6 text-black mt-4">
-                <h1 class="text-center">Simple
+            <div class="col-md-6 text-black">
+                <!-- <h1 class="text-center">Simple
                     <span class="text-warning">Expense Tracker</span>
-                </h1>
-                <p class="lead my-4 text-center">
+                </h1> -->
+                <!-- <p class="lead my-4 text-center">
                     Gain a comprehensive overview of your financial landscape.
-                </p>
+                </p> -->
+                <div class="card bg-info-subtle m-lg-5" style="width: 500px">
+                    <p class="lead my-4 text-center">
+                        Gain a comprehensive overview of your financial landscape.
+                    </p>
+                </div>
                 <div class="card bg-info-subtle m-lg-5" style="width: 500px">
                     <div class="card-body">
                         <button class="btn btn-info" style="width: 200px" onclick="loginPage()">Login</button>
@@ -44,7 +49,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form onsubmit="signup(event)">
+                        <form id="signup_form" onsubmit="signup(event)">
                             <label class="form-label"> Name</label>
                             <input id="name" type="text" name="name" class="form-control" required />
                             <label class="form-label"> Email</label>
@@ -64,7 +69,7 @@
                     </div>
                     <div class="card-body">
 
-                        <form onsubmit="login(event)">
+                        <form id="login_form" onsubmit="login(event)">
                             <label class="form-label"> Email</label>
                             <input id="email" type="email" name="email" class="form-control" required />
                             <label class="form-label"> password</label>
@@ -83,12 +88,22 @@
 
             </div>
             <div class="col-md-6 container">
-                <img src="/images/primary.jpg" alt="" class="img-fluid d-none d-sm-block">
-                <p class="lead my-4 text-center">
-                    Making it easy to track expenses, set
-                    budgets, and achieve your financial goals. With seamless integration and a glanceable dashboard,
-                    stay in control of your money effortlessly.
-                </p>
+                <!-- <img src="/images/primary.jpg" alt="" class="img-fluid d-none d-sm-block"> -->
+                <div class="card m-lg-5">
+                    <div class="card-body">
+                        <img src="/images/primary.jpg" alt="" class="img-fluid d-none d-sm-block">
+                    </div>
+                </div>
+                <div class="card m-lg-5">
+                    <div class="card-body">
+                        <p class="lead my-4 text-center">
+                            Making it easy to track expenses, set
+                            budgets, and achieve your financial goals. With seamless integration and a glanceable
+                            dashboard,
+                            stay in control of your money effortlessly.
+                        </p>
+                    </div>
+                </div>
             </div>
 
         </div>

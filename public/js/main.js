@@ -14,14 +14,12 @@ async function saveToStorage(e) {
         description: description,
         category: category
     }
-    const token = localStorage.getItem('token')
     let res = await axios.post(`../expense/add-expense`, obj, { headers: { "Authorization": token } });
     showNewExpenseOnScreen(res.data.newExpenseDetails);
     // new DataTable('#example');
 }
+var token = localStorage.getItem('token');
 window.addEventListener("DOMContentLoaded", async () => {
-    //token for authentication
-    const token = localStorage.getItem('token')
     //checking for pro sub
     const currentuser = await axios.get(`../user/currentuser`, { headers: { "Authorization": token } });
     console.log(currentuser.data.user);
@@ -104,7 +102,6 @@ function showNewExpenseOnScreen(obj, ID = '1qazx234rfvrrf') {
 function editItem(e) {
     if (e.target.classList.contains('delete')) {
         if (confirm('Are You Sure?')) {
-            const token = localStorage.getItem('token')
             var div = e.target.parentElement.parentElement;
             body.removeChild(div);
             var id = e.target.parentElement.parentElement.id;
@@ -117,7 +114,6 @@ function editItem(e) {
 
 document.getElementById('rzp-button1').onclick = async function (e) {
     try {
-        const token = localStorage.getItem('token');
         const response = await axios.get("../purchase/premiummembership", {
             headers: {
                 'Authorization': token
@@ -176,4 +172,16 @@ document.getElementById('rzp-button1').onclick = async function (e) {
 }
 document.getElementById('rzp-button2').onclick = async function (e) {
     window.location.href = "proPage"
+}
+
+async function showingProfileModel() {
+    try {
+        const user = await axios.get('/user/currentuser', { headers: { "Authorization": token } });
+        profile_model_name.innerHTML = `Name: ${user.data.user.name}`;
+        profile_model_email.innerHTML = `Email: ${user.data.user.email}`;
+
+    } catch (error) {
+        console.log(error);
+        alert(error.response.data.message);
+    }
 }

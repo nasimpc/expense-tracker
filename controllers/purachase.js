@@ -34,7 +34,6 @@ exports.premiumMembership = async (req, res, nex) => {
 exports.updateTransactionStatus = async (req, res, nex) => {
     const { order_id, payment_id, status } = req.body;
     try {
-        console.log(req.user.order, order_id);
         const { user } = req;
         const { order } = user;
         let currOrder;

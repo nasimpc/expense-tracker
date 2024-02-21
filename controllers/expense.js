@@ -24,7 +24,6 @@ exports.getExpense = async (req, res, next) => {
         const limit = 100;
         const offset = 0;
         const expenses = await Expense.find({ "userId": user._id }).skip(offset).limit(limit);
-        console.log(expenses)
         res.status(200).json({
             allExpenses: expenses,
             hasMoreExpenses: expenses.length === limit,

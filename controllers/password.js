@@ -10,7 +10,7 @@ exports.requestResetPassword = async (req, res, nex) => {
     try {
 
         const { email } = req.body;
-        const user = await User.findOne({ email })
+        const user = await User.findOne({ email: email })
         if (user) {
             const sender = {
                 email: 'nasimpcm@gmail.com',

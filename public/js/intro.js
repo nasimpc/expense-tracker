@@ -12,8 +12,9 @@ async function signup(e) {
     try {
         let res = await axios.post(`../user/add-user`, obj);
         alert(res.data.message)
-        console.log(res);
+
         localStorage.setItem('token', res.data.token);
+        signup_form.reset();
         window.location.href = "mainPage"
     }
     catch (err) {
@@ -36,6 +37,7 @@ async function login(e) {
         if (response.status === 200) {
             alert(response.data.message)
             localStorage.setItem('token', response.data.token);
+            login_form.reset();
             window.location.href = "mainPage"
         }
 

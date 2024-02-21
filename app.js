@@ -12,7 +12,7 @@ const userRoutes = require('./routes/user');
 const premiumRouter = require('./routes/premium');
 const purchaseRouter = require('./routes/purchase');
 const expenseRoutes = require('./routes/expense');
-const passwordRoutes = require('./routes/resetpass');
+const passwordRoutes = require('./routes/reset-password');
 
 const app = express();
 app.use(cors());
